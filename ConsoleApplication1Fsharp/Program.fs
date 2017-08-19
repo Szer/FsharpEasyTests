@@ -8,7 +8,8 @@ let inline (^) x y = pown x y // степень числа
 let inline square x  = x ^ 2 //квадрат числа
 
 //1 найти сумму кубов трех чисел
-let sumOfCubes x y z = Seq.sumBy (fun e -> e ^ 3) [x; y; z;]
+let sumofCubesSeq seq = seq |> Seq.sumBy (fun e -> e ^ 3)
+let sumOfCubes x y z = [x; y; z;] |> sumofCubesSeq
 let asdsfag = sumOfCubes 5 3 2
 
 //2. Даны 2 числа найти среднее арифметическое их квадратов и среднее арифметическое их модулей
@@ -30,9 +31,9 @@ let testRoots = roots 1.0 3.0 -4.0
 
 //5.Посчитать сумму чисел трехзначного числа x 
 let rec sumOfFigures (x:int) =  
-    if x = 0 then 0
-    else 
-       (x % 10) + sumOfFigures (x / 10)
+    match x with
+    | 0 -> 0
+    | x -> (x % 10) + sumOfFigures (x / 10)
 let testsSumOfFigures = sumOfFigures 537
 
 //6. Найти минимум двух максимумов min(max(a,b), max(c,d))
